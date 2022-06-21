@@ -7,13 +7,12 @@ export const TaskCreator = ({ createNewTask }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         createNewTask(newTaskName);
-        localStorage.setItem('task', newTaskName);
         setNewTaskName('');
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            {/* capturando lo que typeamos en el input con useState  */ }
+            {/* capturando lo que typeamos en el input con useState  */}
             <input
                 type="text"
                 placeholder='Enter a new task'
@@ -23,7 +22,7 @@ export const TaskCreator = ({ createNewTask }) => {
             <button onClick={(handleSubmit)}>save task</button>
         </form>
     )
-   
+
 
 
 }
