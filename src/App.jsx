@@ -1,12 +1,10 @@
-import { useState } from 'react'
 import './App.css'
+import { TaskCreator } from './components/TaskCreator'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
-     hola
+      <TaskCreator/>
     </div>
   )
 }
