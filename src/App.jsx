@@ -1,20 +1,27 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { TaskCreator } from './components/TaskCreator'
+import { TaskTable } from './components/TaskTable'
 
 function App() {
 
   const [taskItems, setTaskItems] = useState([]);
 
-  {/* añadimos el nombre de nyuestra tarea ingresada al array de objetos */ }
-  function createNewTask(taskName) {
-
+  {/* añadimos el nombre de nuestra tarea ingresada al array de objetos */ }
+  const createNewTask = (taskName) => {
     {/* validamos que la tarea no esté repetida */ }
     if (!taskItems.find(task => task.name === taskName)) {
       setTaskItems([...taskItems, { name: taskName, done: false }])
     }
 
   }
+
+  const toggleTask = (task) =>
+    // cambiamos el estado de la tarea a cheched y viceversa
+    setTaskItems(
+      taskItems.map((t) => (t.name === task.name ? { ...t, done: !t.done } : t))
+    );
+
   {/* apenas cargue la aplicación se ejecuta este effect que obtiene los datos guardados en tasks del localStorage parseandolos */ }
   useEffect(() => {
     let data = localStorage.getItem('tasks')
@@ -32,27 +39,7 @@ function App() {
     <div className="App">
       {/* pasamos como props la función para crear una nueva tarea */}
       <TaskCreator createNewTask={createNewTask} />
-
-      <table>
-        <thead>
-          <tr>
-            <th>
-              task
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* recorremos el array de objetos de tareas y por cada tarea mostramos su nombre en una tabla. */}
-          {
-            taskItems.map(task => (
-              <tr key={task.name}>
-                <td>{task.name}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-
+      <TaskTable tasks={taskItems} toggleTask={toggleTask} />
     </div>
   )
 }
