@@ -1,12 +1,13 @@
-export const TaskRow = ({task, toggleTask}) => {
+export const TaskRow = ({ task, toggleTask }) => {
     return (
         <tr>
-            <td>{task.name}</td>
-            <input
-                type='checkbox'
-                checked={task.done}
-                onChange={() => toggleTask(task)}
-            />
+            <td>{task.name}
+                <input
+                    type='checkbox'
+                    checked={task.done}
+                    onChange={() => toggleTask(task)}
+                />
+            </td>
         </tr>
     )
 }

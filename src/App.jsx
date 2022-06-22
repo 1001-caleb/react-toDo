@@ -6,6 +6,7 @@ import { TaskTable } from './components/TaskTable'
 function App() {
 
   const [taskItems, setTaskItems] = useState([]);
+  const [showCompleted, setShowCompleted] = useState(false);
 
   {/* añadimos el nombre de nuestra tarea ingresada al array de objetos */ }
   const createNewTask = (taskName) => {
@@ -40,6 +41,14 @@ function App() {
       {/* pasamos como props la función para crear una nueva tarea */}
       <TaskCreator createNewTask={createNewTask} />
       <TaskTable tasks={taskItems} toggleTask={toggleTask} />
+      <div>
+        <input type="checkbox" onChange={e => setShowCompleted(!showCompleted)} /> <label>Show task done</label>
+      </div>
+      {
+        showCompleted == true && (
+          <TaskTable tasks={taskItems} toggleTask={toggleTask} showCompleted={showCompleted} />
+        )
+      }
     </div>
   )
 }
