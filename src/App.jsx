@@ -8,6 +8,11 @@ function App() {
 
   const [taskItems, setTaskItems] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
+  const [theme, setTheme] = useState('dark');
+
+  const toggleTheme = () =>{
+    theme === 'dark' ? setTheme('ligth') : setTheme('dark')
+  }
 
   {/* añadimos el nombre de nuestra tarea ingresada al array de objetos */ }
   const createNewTask = (taskName) => {
@@ -33,7 +38,7 @@ function App() {
   }, [])
 
   const cleanTask = () => {
-    setTaskItems(taskItems.filter(task => !task.done)) 
+    setTaskItems(taskItems.filter(task => !task.done))
   }
 
   {/* vemos si nuestro array de tareas cambió y lo agregamos al localStorage en formato JSON */ }
@@ -42,12 +47,15 @@ function App() {
   }, [taskItems]);
 
   return (
-    <div className="App">
+    <div className="App" data-theme={theme}>
+ 
+      <input type="checkbox" className="toggle toggle-primary" onChange={toggleTheme} />
+    
       {/* pasamos como props la función para crear una nueva tarea */}
       <TaskCreator createNewTask={createNewTask} />
       <TaskTable tasks={taskItems} toggleTask={toggleTask} />
       <VisibilityControl
-        isChecked = {showCompleted}
+        isChecked={showCompleted}
         setShowCompleted={(cheked) => setShowCompleted(cheked)}
         cleanTask={cleanTask}
       />
