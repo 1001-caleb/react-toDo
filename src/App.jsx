@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './App.css'
 import { TaskCreator } from './components/TaskCreator'
 import { TaskTable } from './components/TaskTable'
 import { VisibilityControl } from './components/VisibilityControl';
@@ -11,7 +10,7 @@ function App() {
   const [theme, setTheme] = useState('dark');
 
   const toggleTheme = () =>{
-    theme === 'dark' ? setTheme('ligth') : setTheme('dark')
+    theme === 'dark' ? setTheme('light') : setTheme('dark')
   }
 
   {/* añadimos el nombre de nuestra tarea ingresada al array de objetos */ }
@@ -47,9 +46,9 @@ function App() {
   }, [taskItems]);
 
   return (
-    <div className="App" data-theme={theme}>
+    <div className="App text-center h-screen" data-theme={theme}>
  
-      <input type="checkbox" className="toggle toggle-primary" onChange={toggleTheme} />
+      <input type="checkbox" className="toggle toggle-primary" onChange={(e)=>toggleTheme(e.target.checked)} />
     
       {/* pasamos como props la función para crear una nueva tarea */}
       <TaskCreator createNewTask={createNewTask} />
