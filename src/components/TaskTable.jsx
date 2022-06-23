@@ -16,7 +16,7 @@ export const TaskTable = ({ tasks, toggleTask, showCompleted = false }) => {
     }
 
     return (
-        <table>
+        <table className='table w-full'>
             <thead>
                 <tr>
                     <th>
