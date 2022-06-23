@@ -14,7 +14,7 @@ export const TaskCreator = ({ createNewTask }) => {
         <form onSubmit={handleSubmit}>
             {/* capturando lo que typeamos en el input con useState  */}
             <input
-                className='input input-bordered w-60 md:w-96'
+                className='input input-bordered w-60 md:w-96 md:text-xl'
                 type="text"
                 placeholder='Enter a new task'
                 value={newTaskName}
