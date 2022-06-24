@@ -1,0 +1,40 @@
+{
+    "background_color": "#121212",
+    "categories": [
+        "productivity",
+        "lifestyle"
+    ],
+    "description": "task for oragnize task",
+    "dir": "lrt",
+    "display_override": [
+        "fullscreen",
+        "minimal-ui"
+    ],
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "https://i.imgur.com/ijXyjMM.png",
+            "sizes": "50x50",
+            "type": "image/png"
+        },
+        {
+            "src": "https://i.imgur.com/ijXyjMM.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://i.imgur.com/ijXyjMM.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "id": "/v1",
+    "lang": "es-MX",
+    "name": "partodo",
+    "orientation": "portrait",
+    "prefer_related_applications": false,
+    "scope": "/",
+    "start_url": "https://partodo.vercel.app",
+    "theme_color": "#121212"
+
+}

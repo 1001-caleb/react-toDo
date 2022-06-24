@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TaskCreator } from './components/TaskCreator'
 import { TaskTable } from './components/TaskTable'
 import { VisibilityControl } from './components/VisibilityControl';
@@ -9,7 +9,7 @@ function App() {
   const [showCompleted, setShowCompleted] = useState(false);
   const [theme, setTheme] = useState('dark');
 
-  const toggleTheme = () =>{
+  const toggleTheme = () => {
     theme === 'dark' ? setTheme('light') : setTheme('dark')
   }
 
@@ -45,11 +45,47 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(taskItems))
   }, [taskItems]);
 
+  const [isReadyForInstall, setIsReadyForInstall] = React.useState(false);
+
+  useEffect(() => {
+    window.addEventListener("beforeinstallprompt", (event) => {
+      // Prevent the mini-infobar from appearing on mobile.
+      event.preventDefault();
+      console.log("👍", "beforeinstallprompt", event);
+      // Stash the event so it can be triggered later.
+      window.deferredPrompt = event;
+      // Remove the 'hidden' class from the install button container.
+      setIsReadyForInstall(true);
+    });
+  }, []);
+  async function downloadApp() {
+    console.log("👍", "butInstall-clicked");
+    const promptEvent = window.deferredPrompt;
+    if (!promptEvent) {
+      // The deferred prompt isn't available.
+      console.log("oops, no prompt event guardado en window");
+      return;
+    }
+    // Show the install prompt.
+    promptEvent.prompt();
+    // Log the result
+    const result = await promptEvent.userChoice;
+    console.log("👍", "userChoice", result);
+    // Reset the deferred prompt variable, since
+    // prompt() can only be called once.
+    window.deferredPrompt = null;
+    // Hide the install button.
+    setIsReadyForInstall(false);
+  }
+
   return (
     <div className="App text-center h-screen" data-theme={theme}>
- 
-      <input type="checkbox" className="toggle toggle-primary" onChange={(e)=>toggleTheme(e.target.checked)} />
-    
+      <div className='flex justify-between text-center w-60 m-auto md:w-full md:p-10'>
+        {isReadyForInstall && <button onClick={downloadApp} className='btn mb-5'>Download app</button>}
+        <input type="checkbox" className="toggle toggle-primary mb-5" onChange={(e) => toggleTheme(e.target.checked)} />
+      </div>
+
+
       {/* pasamos como props la función para crear una nueva tarea */}
       <TaskCreator createNewTask={createNewTask} />
       <TaskTable tasks={taskItems} toggleTask={toggleTask} />
