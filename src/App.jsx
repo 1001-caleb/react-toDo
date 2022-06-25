@@ -79,9 +79,9 @@ function App() {
   }
 
   return (
-    <div className="App text-center h-screen" data-theme={theme}>
+    <div className="App text-center h-max" data-theme={theme}>
       <div className='flex justify-between text-center w-60 m-auto md:w-full md:p-10'>
-        {isReadyForInstall && <button onClick={downloadApp} className='btn mb-5'>Download app</button>}
+        {isReadyForInstall && <button onClick={down} className='btn mb-5'>Download app</button>}
         <input type="checkbox" className="toggle toggle-primary mb-5" onChange={(e) => toggleTheme(e.target.checked)} />
       </div>
 
